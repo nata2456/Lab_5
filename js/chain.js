@@ -48,5 +48,36 @@ class AuthorizeHandler extends Handler {
 
     }
 }
+class SmsHandler extends Handler {
+
+    handle(request) {
+        function getRandomString(length) {
+            var randomChars = '0123456789';
+            var result = '';
+            for (var i = 0; i < length; i++) {
+                result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+            }
+            return result;
+        }
+        let sms = getRandomString(6);
+        console.log(sms);
+        let counter = 3;
+        for (let i = 0; i < counter; i++) {
+            const readline = prompt();
+            const sms_user = readline("Enter the received code = ");
+            if (sms_user == sms) {
+                return super.handle(request);
+            }
+            console.log("Wrong code");
+        }
+        return null;
+    }
+}
+class ResponceHandler extends Handler {
+    handle(request) {
+        console.log("Привіт");
+        return "";
+    }
+}
 
 export { LogHandler, NotRobot, AuthorizeHandler, SmsHandler, ResponceHandler };
