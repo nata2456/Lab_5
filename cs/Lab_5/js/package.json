@@ -1,0 +1,26 @@
+{
+    "name": "node-js-lab3",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon --no-stdin --exec babel-node index.js"
+    },
+    "keywords": [
+        "node"
+    ],
+    "author": "Natalia Holubka",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/cli": "^7.13.14",
+        "@babel/core": "^7.13.14",
+        "@babel/node": "^7.13.13",
+        "@babel/preset-env": "^7.13.12"
+    },
+    "dependencies": {
+        "nodemon": "^2.0.7",
+        "prompt-sync": "^4.2.0"
+    }
+}
