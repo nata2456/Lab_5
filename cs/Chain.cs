@@ -4,25 +4,43 @@ using System.Text.Json;
 
 namespace ChainOfResponsibility
 {
-    class Handler {
-    setNext(handler) {
-        this._next = handler;
-        return handler;
-    }
-    handle(request) {
-        if (this._next && this._next.handle)
-            return this._next.handle(request);
-        else
-            return null;
+public interface IHandler
+    {
+        IHandler SetNext(IHandler handler);
+
+        object Handle(object request);
     }
 
-}
-class LogHandler extends Handler {
-    handle(request) {
-        console.log(Log\n ${JSON.stringify(request)});
-        return super.handle(request);
+    class AbstractHandler : IHandler
+    {
+        private IHandler _nextHandler;
+
+        public IHandler SetNext(IHandler handler)
+        {
+            this._nextHandler = handler;
+            return handler;
+        }
+
+        public virtual object Handle(object request)
+        {
+            if (this._nextHandler != null)
+            {
+                return this._nextHandler.Handle(request);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
-}
+     class LogHandler : AbstractHandler
+    {
+        public override object Handle(object request)
+        {
+            Console.WriteLine("Log");
+            return base.Handle(request);
+        }
+    }
     class Request
     {
         public String Login { get; set; }
