@@ -4,7 +4,25 @@ using System.Text.Json;
 
 namespace ChainOfResponsibility
 {
-    
+    class Handler {
+    setNext(handler) {
+        this._next = handler;
+        return handler;
+    }
+    handle(request) {
+        if (this._next && this._next.handle)
+            return this._next.handle(request);
+        else
+            return null;
+    }
+
+}
+class LogHandler extends Handler {
+    handle(request) {
+        console.log(Log\n ${JSON.stringify(request)});
+        return super.handle(request);
+    }
+}
     class Request
     {
         public String Login { get; set; }
