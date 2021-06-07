@@ -1,5 +1,23 @@
 import prompt from "prompt-sync";
+class Handler {
+    setNext(handler) {
+        this._next = handler;
+        return handler;
+    }
+    handle(request) {
+        if (this._next && this._next.handle)
+            return this._next.handle(request);
+        else
+            return null;
+    }
 
+}
+class LogHandler extends Handler {
+    handle(request) {
+        console.log(Log\n ${JSON.stringify(request)});
+        return super.handle(request);
+    }
+}
 class NotRobot extends Handler {
     handle(request) {
         function getRandomInt(max) {
